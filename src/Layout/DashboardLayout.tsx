@@ -1,120 +1,171 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
 import { useState } from "react";
-
-
+import { Button } from "@/components/ui/button";
 
 export default function DashboardLayout() {
   const location = useLocation();
-
-  /*const mainNav = [
-    { name: "Dashboard", path: "/" },
-    { name: "View Menu 🍱", path: "/menu" },
-    { name: "Quick Order 💳", path: "/order" },
-    { name: "Schedule Pickup 📦", path: "/pickup" },
-    { name: "Payments 💰", path: "/payments" },
-  ];
-
-  const bottomNav = [
-    { name: "Profile 👤", path: "/profile" },
-    { name: "Settings ⚙️", path: "/settings" },
-  ];*/
-
   const [collapsed, setCollapsed] = useState(false);
 
- return (
+  // Active state helper
+  const isActive = (path: string) => location.pathname === path;
+
+  return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900 text-gray-100">
-      {/* Sidebar */}
 
-      <aside className="flex flex-col w-64 h-full border-r bg-sidebar text-sidebar-foreground">
-  {/* Header & Logo */}
-  <div className="px-4 py-6">
-    <h2 className="text-2xl font-semibold tracking-tight">Mess Mate</h2>
-  </div>
-     {/* Sidebar Button */ } 
-     
-  <button
-  onClick={() => setCollapsed(!collapsed)}
-  className="absolute left-64 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-orange-500 hover:bg-orange-600 transition-all hover:scale-110 shadow-lg z-50"
->
-  {collapsed ? "➡️" : "⬅️"}
-</button>
+      {/* SIDEBAR */}
+      <aside
+        className={`relative flex flex-col h-full border-r bg-sidebar text-sidebar-foreground transition-all duration-300
+          ${collapsed ? "w-20" : "w-64"}`}
+      >
+        {/* Logo / Title */}
+        <div className="px-4 py-6">
+          {!collapsed && (
+            <h2 className="text-2xl font-semibold tracking-tight">
+              Mess Mate
+            </h2>
+          )}
+        </div>
 
+        {/* Collapse Button */}
+        <Button
+          variant="secondary"
+          onClick={() => setCollapsed(!collapsed)}
+          className={`absolute top-4 -right-4 h-8 w-8 rounded-full shadow-lg transition-transform
+            ${collapsed ? "rotate-180" : ""}`}
+        >
+          {collapsed ? "➡️" : "⬅️"}
+        </Button>
 
+        {/* NAVIGATION */}
+        <nav className="flex-1 px-3 space-y-1">
 
+          {/* Dashboard */}
+          <Link
+            to="/"
+            className={`
+              flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
+              ${isActive("/") 
+                ? "bg-orange-500/20 text-orange-500 font-medium"
+                : "hover:bg-accent hover:text-accent-foreground"}
+            `}
+          >
+            {isActive("/") && (
+              <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
+            )}
+            <span>📊</span>
+            {!collapsed && <span>Dashboard</span>}
+          </Link>
 
-  {/* Navigation */}
-  <nav className="flex-1 px-3 space-y-1">
-    <Link
-      to="/"
-      className={`flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-accent hover:text-accent-foreground ${
-        location.pathname === "/" && "bg-accent"
-      }`}
-    >
-      📊 Dashboard
-    </Link>
+          {/* Menu */}
+          <Link
+            to="/menu"
+            className={`
+              flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
+              ${isActive("/menu")
+                ? "bg-orange-500/20 text-orange-500 font-medium"
+                : "hover:bg-accent hover:text-accent-foreground"}
+            `}
+          >
+            {isActive("/menu") && (
+              <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
+            )}
+            <span>🍱</span>
+            {!collapsed && <span>View Menu</span>}
+          </Link>
 
-    <Link
-      to="/menu"
-      className={`flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-accent hover:text-accent-foreground ${
-        location.pathname === "/menu" && "bg-accent"
-      }`}
-    >
-      🍱 View Menu
-    </Link>
+          {/* Quick Order */}
+          <Link
+            to="/QuickOrder"
+            className={`
+              flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
+              ${isActive("/order")
+                ? "bg-orange-500/20 text-orange-500 font-medium"
+                : "hover:bg-accent hover:text-accent-foreground"}
+            `}
+          >
+            {isActive("/order") && (
+              <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
+            )}
+            <span>💳</span>
+            {!collapsed && <span>Quick Order</span>}
+          </Link>
 
-    <Link
-      to="/order"
-      className={`flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-accent hover:text-accent-foreground ${
-        location.pathname === "/order" && "bg-accent"
-      }`}
-    >
-      💳 Quick Order
-    </Link>
+          {/* Pickup */}
+          <Link
+            to="/SchedulePickup"
+            className={`
+              flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
+              ${isActive("/pickup")
+                ? "bg-orange-500/20 text-orange-500 font-medium"
+                : "hover:bg-accent hover:text-accent-foreground"}
+            `}
+          >
+            {isActive("/pickup") && (
+              <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
+            )}
+            <span>📦</span>
+            {!collapsed && <span>Schedule Pickup</span>}
+          </Link>
 
-    <Link
-      to="/pickup"
-      className={`flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-accent hover:text-accent-foreground ${
-        location.pathname === "/pickup" && "bg-accent"
-      }`}
-    >
-      📦 Schedule Pickup
-    </Link>
+          {/* Payments */}
+          <Link
+            to="/payments"
+            className={`
+              flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
+              ${isActive("/payments")
+                ? "bg-orange-500/20 text-orange-500 font-medium"
+                : "hover:bg-accent hover:text-accent-foreground"}
+            `}
+          >
+            {isActive("/payments") && (
+              <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
+            )}
+            <span>💰</span>
+            {!collapsed && <span>Payments</span>}
+          </Link>
+        </nav>
 
-    <Link
-      to="/payments"
-      className={`flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-accent hover:text-accent-foreground ${
-        location.pathname === "/payments" && "bg-accent"
-      }`}
-    >
-      💰 Payments
-    </Link>
-  </nav>
+        {/* BOTTOM SECTION */}
+        <div className="border-t p-4 mt-auto">
 
-  {/* Bottom Profile + Settings */}
-  <div className="border-t p-4 mt-auto">
-    <Link
-      to="/profile"
-      className={`flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-accent hover:text-accent-foreground ${
-        location.pathname === "/profile" && "bg-accent"
-      }`}
-    >
-      👤 Profile
-    </Link>
+          {/* Profile */}
+          <Link
+            to="/profile"
+            className={`
+              flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
+              ${isActive("/profile")
+                ? "bg-orange-500/20 text-orange-500 font-medium"
+                : "hover:bg-accent hover:text-accent-foreground"}
+            `}
+          >
+            {isActive("/profile") && (
+              <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
+            )}
+            <span>👤</span>
+            {!collapsed && <span>Profile</span>}
+          </Link>
 
-    <Link
-      to="/settings"
-      className={`flex items-center gap-3 px-3 py-2 mt-1 text-sm rounded-md hover:bg-accent hover:text-accent-foreground ${
-        location.pathname === "/settings" && "bg-accent"
-      }`}
-    >
-      ⚙️ Settings
-    </Link>
-  </div>
-</aside>
+          {/* Settings */}
+          <Link
+            to="/settings"
+            className={`
+              flex items-center gap-3 px-3 py-2 mt-1 text-sm rounded-md relative transition-all
+              ${isActive("/settings")
+                ? "bg-orange-500/20 text-orange-500 font-medium"
+                : "hover:bg-accent hover:text-accent-foreground"}
+            `}
+          >
+            {isActive("/settings") && (
+              <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
+            )}
+            <span>⚙️</span>
+            {!collapsed && <span>Settings</span>}
+          </Link>
 
+        </div>
+      </aside>
 
-      {/* Main Content */}
+      {/* MAIN CONTENT */}
       <main className="flex-1 p-6 overflow-y-auto">
         <Outlet />
       </main>

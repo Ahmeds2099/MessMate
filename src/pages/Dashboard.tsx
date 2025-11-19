@@ -87,6 +87,38 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Popular Dish + Live Mess Status (Side by Side) */}
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+
+  {/* Popular Dish */}
+  <Card className="shadow-sm">
+    <CardHeader>
+      <CardTitle>Popular Dish Right Now 🍽️</CardTitle>
+    </CardHeader>
+
+    <CardContent className="space-y-3">
+      <p className="text-lg font-semibold">Paneer Butter Masala</p>
+      <p className="text-gray-600 dark:text-gray-300 text-sm">
+        Loved by students today! High demand during lunch.
+      </p>
+    </CardContent>
+  </Card>
+
+  {/* Live Mess Status Dashboard */}
+  <Card className="shadow-sm">
+    <CardHeader>
+      <CardTitle>Live Mess Status Dashboard</CardTitle>
+    </CardHeader>
+
+    <CardContent className="h-32 flex items-center justify-center text-gray-500">
+      <p>📡 Live Queue, Occupancy & Activity Coming Soon…</p>
+    </CardContent>
+  </Card>
+
+</div>
+
+
     </motion.div>
   );
 }

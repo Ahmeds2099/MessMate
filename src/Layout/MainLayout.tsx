@@ -26,10 +26,6 @@ export default function MainLayout() {
         <Link to="/complaints">
           <Button variant="outline">Complaints</Button>
         </Link>
-
-          <Link to="/weekly-plan">
-          <Button variant="outline">Weekly Plan</Button>
-          </Link>
       </div>
 
       {/* This is where pages render */}
