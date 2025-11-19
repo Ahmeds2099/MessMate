@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
 
+//Admin SIde for Adding Students 
+
 export default function Students() {
   const [students, setStudents] = useState<Student[]>([
     { id: uuidv4(), name: "Aman Kumar", room: "101", feeDue: 0 },

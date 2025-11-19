@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
 
 export default function Dashboard() {
   const user = {
@@ -21,9 +23,11 @@ export default function Dashboard() {
     >
       {/* Header */}
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-  Welcome back, {user.name.split(" ")[0]} 👋
-</h1>
+        Welcome back, {user.name.split(" ")[0]} 👋
+      </h1>
 
+      {/* Navigation */}
+      
 
       {/* Profile Summary */}
       <Card className="p-4 shadow-sm">
@@ -36,7 +40,7 @@ export default function Dashboard() {
             <p className="font-medium">{user.name}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Room No</p>
+            <p className="text-sm text-muted-foreground">Reg No</p>
             <p className="font-medium">{user.regno}</p>
           </div>
           <div>
