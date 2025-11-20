@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 
 export default function Payments() {
   const history = [
-    { id: 1, amount: 1200, date: "2024-02-15" },
-    { id: 2, amount: 850, date: "2024-02-10" },
+    { id: 1, amount: 1200, date: "2024-02-15",time:"10:25AM" },
+    { id: 2, amount: 850, date:  "2024-02-10",time:"1:30PM" },
   ];
 
   return (
@@ -29,6 +29,7 @@ export default function Payments() {
             >
               <span className="font-medium">₹{h.amount}</span>
               <span className="text-gray-500">{h.date}</span>
+              <span className="text-gray-500">{h.time}</span>
             </div>
           ))}
         </CardContent>

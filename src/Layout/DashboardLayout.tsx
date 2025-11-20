@@ -18,26 +18,28 @@ export default function DashboardLayout() {
           ${collapsed ? "w-20" : "w-64"}`}
       >
         {/* Logo / Title */}
-        <div className="px-4 py-6">
+        {/*<div className="px-4 py-6">
           {!collapsed && (
             <h2 className="text-2xl font-semibold tracking-tight">
               Mess Mate
             </h2>
           )}
         </div>
+        */}
+
 
         {/* Collapse Button */}
         <Button
           variant="secondary"
           onClick={() => setCollapsed(!collapsed)}
-          className={`absolute top-4 -right-4 h-8 w-8 rounded-full shadow-lg transition-transform
+          className={`absolute top-4 -right-4 h-8 w-8 rounded-full shadow-lg transition-transform 
             ${collapsed ? "rotate-180" : ""}`}
         >
           {collapsed ? "➡️" : "⬅️"}
         </Button>
 
-        {/* NAVIGATION */}
-        <nav className="flex-1 px-3 space-y-1">
+        {/* NAVIGATION SIDEBAR */}
+        <nav className="flex-1 px-3 pt-6 space-y-5">
 
           {/* Dashboard */}
           <Link
@@ -46,8 +48,7 @@ export default function DashboardLayout() {
               flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
               ${isActive("/") 
                 ? "bg-orange-500/20 text-orange-500 font-medium"
-                : "hover:bg-accent hover:text-accent-foreground"}
-            `}
+                : "hover:bg-accent hover:text-accent-foreground"}`}
           >
             {isActive("/") && (
               <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
@@ -63,8 +64,7 @@ export default function DashboardLayout() {
               flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
               ${isActive("/menu")
                 ? "bg-orange-500/20 text-orange-500 font-medium"
-                : "hover:bg-accent hover:text-accent-foreground"}
-            `}
+                : "hover:bg-accent hover:text-accent-foreground"}`}
           >
             {isActive("/menu") && (
               <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
@@ -80,8 +80,7 @@ export default function DashboardLayout() {
               flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
               ${isActive("/order")
                 ? "bg-orange-500/20 text-orange-500 font-medium"
-                : "hover:bg-accent hover:text-accent-foreground"}
-            `}
+                : "hover:bg-accent hover:text-accent-foreground"}`}
           >
             {isActive("/order") && (
               <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
@@ -97,8 +96,7 @@ export default function DashboardLayout() {
               flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
               ${isActive("/pickup")
                 ? "bg-orange-500/20 text-orange-500 font-medium"
-                : "hover:bg-accent hover:text-accent-foreground"}
-            `}
+                : "hover:bg-accent hover:text-accent-foreground"}`}
           >
             {isActive("/pickup") && (
               <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
@@ -114,8 +112,7 @@ export default function DashboardLayout() {
               flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
               ${isActive("/payments")
                 ? "bg-orange-500/20 text-orange-500 font-medium"
-                : "hover:bg-accent hover:text-accent-foreground"}
-            `}
+                : "hover:bg-accent hover:text-accent-foreground"}`}
           >
             {isActive("/payments") && (
               <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
@@ -135,8 +132,7 @@ export default function DashboardLayout() {
               flex items-center gap-3 px-3 py-2 text-sm rounded-md relative transition-all
               ${isActive("/profile")
                 ? "bg-orange-500/20 text-orange-500 font-medium"
-                : "hover:bg-accent hover:text-accent-foreground"}
-            `}
+                : "hover:bg-accent hover:text-accent-foreground"}`}
           >
             {isActive("/profile") && (
               <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
@@ -152,8 +148,7 @@ export default function DashboardLayout() {
               flex items-center gap-3 px-3 py-2 mt-1 text-sm rounded-md relative transition-all
               ${isActive("/settings")
                 ? "bg-orange-500/20 text-orange-500 font-medium"
-                : "hover:bg-accent hover:text-accent-foreground"}
-            `}
+                : "hover:bg-accent hover:text-accent-foreground"}`}
           >
             {isActive("/settings") && (
               <span className="absolute left-0 h-full w-1 bg-orange-500 rounded-r-md" />
@@ -166,7 +161,10 @@ export default function DashboardLayout() {
       </aside>
 
       {/* MAIN CONTENT */}
-      <main className="flex-1 p-6 overflow-y-auto">
+      <main className="flex-1 pt-0 px-6 pb-6 overflow-y-auto">
+
+
+
         <Outlet />
       </main>
     </div>
