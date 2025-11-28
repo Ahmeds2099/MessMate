@@ -20,35 +20,38 @@ export default function Payments() {
   ];
 
   // 🔄 Sorting State
-  const [sortKey, setSortKey] = useState("");
-  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortKey, setSortKey] = useState<keyof typeof historyData[0] | "">("");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   // 📌 Create a sorted copy of the history
   const sortedHistory = [...historyData].sort((a, b) => {
-    if (!sortKey) return 0;
+  if (!sortKey) return 0;
 
-    let valA = a[sortKey];
-    let valB = b[sortKey];
+  let valA = a[sortKey as keyof typeof a];
+  let valB = b[sortKey as keyof typeof b];
 
-    // Convert date to actual Date object for proper sorting
-    if (sortKey === "date") {
-      valA = new Date(a.date);
-      valB = new Date(b.date);
-    }
+  // Convert date to timestamps for sorting
+  if (sortKey === "date") {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+  }
 
-    // Convert time to comparable format
-    if (sortKey === "time") {
-      valA = new Date(`1970-01-01 ${a.time}`);
-      valB = new Date(`1970-01-01 ${b.time}`);
-    }
+  // Convert time to timestamps for sorting
+  if (sortKey === "time") {
+    const timeA = new Date(`1970-01-01 ${a.time}`).getTime();
+    const timeB = new Date(`1970-01-01 ${b.time}`).getTime();
+    return sortOrder === "asc" ? timeA - timeB : timeB - timeA;
+  }
 
-    if (valA < valB) return sortOrder === "asc" ? -1 : 1;
-    if (valA > valB) return sortOrder === "asc" ? 1 : -1;
-    return 0;
-  });
+  // Normal number/string comparison
+  if (valA < valB) return sortOrder === "asc" ? -1 : 1;
+  if (valA > valB) return sortOrder === "asc" ? 1 : -1;
+  return 0;
+});
 
   // 🧠 Function to handle sorting
-  const handleSort = (key) => {
+  const handleSort = (key: keyof typeof historyData[0]) => {
     if (sortKey === key) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc"); // toggle
     } else {
